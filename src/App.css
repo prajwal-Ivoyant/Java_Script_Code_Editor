@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.explorer {
+  background-color: #1e1e1e;
+  padding: 3px;
+
+}
+
+.files {
+  padding: 7px;
+}
+
+.listOfFiles {
+  width: 220px;
+  background-color: #252526;
+  border-right: 1px solid #333;
+  padding: 12px;
+}
+
+
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.language {
+  height: 40px;
+  background-color: #2d2d2d;
+  border-bottom: 1px solid #333;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 14px;
+  color: #cccccc;
+}
+
+.right> :nth-child(2) {
+  flex: 1;
+  border-bottom: 1px solid #333;
+}

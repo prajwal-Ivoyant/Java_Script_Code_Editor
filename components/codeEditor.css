@@ -1,0 +1,8 @@
+.result {
+    height: 180px;
+    background-color: #111;
+    padding: 12px;
+    font-family: monospace;
+    color: #00ffcc;
+    overflow-y: auto;
+}
