@@ -1,11 +1,20 @@
 
 import './App.css'
+import files from './data/files'
+
 
 import CodeEditor from '../components/codeEditor'
 
 import ShowFiles from '../components/fileManager'
+import { useState } from 'react'
+
+import TabsAbove from '../components/tabs'
 
 function App() {
+
+  const [currentFile, setCurrentFile] = useState(
+    Object.values(files)[0]
+  )
 
 
   return (
@@ -15,16 +24,24 @@ function App() {
         <div className="listOfFiles">
           <div className='explorer'><p>Explorer</p></div><hr />
           <div className="files">
-            <ShowFiles></ShowFiles>
+            <ShowFiles
+              files={files}
+              onFileSelect={setCurrentFile}
+            />
           </div>
         </div>
 
 
         <div className="right">
           <div className="language">
-            python, js, c, c++, java
+            <TabsAbove
+              files={files}
+              onFileSelect={setCurrentFile}
+            />
           </div>
-          <CodeEditor />
+          <CodeEditor
+            code={currentFile.value}
+          />
 
         </div>
 

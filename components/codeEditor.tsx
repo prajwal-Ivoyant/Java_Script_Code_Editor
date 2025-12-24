@@ -1,16 +1,26 @@
 
 import { Editor } from '@monaco-editor/react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import './codeEditor.css'
 
-export default function CodeEditor() {
+interface codeEditorProps {
+    code: string;
+}
 
-    const [code, setCode] = useState("")
-    const [output, setOutput] = useState("")
+
+export default function CodeEditor({ code }: codeEditorProps) {
+
+    const [editorcode, setEditorCode] = useState(code);
+    const [output, setOutput] = useState("");
+
+    useEffect(() => {
+        setEditorCode(code)
+    }, [code]);
+
 
     const runCode = () => {
-        let logs = []
+        let logs: string[] = []
 
         const originalLog = console.log
         console.log = (...args) => {
@@ -39,8 +49,8 @@ export default function CodeEditor() {
                 width="100%"
                 language="javascript"
                 theme="vs-dark"
-                value={code}
-                onChange={(value) => setCode(value ?? "")}
+                value={editorcode}
+                onChange={(value) => setEditorCode(value ?? "")}
             />
 
             <button onClick={runCode}>
