@@ -1,36 +1,30 @@
-import { Tabs } from 'antd';
-import type { TabsProps } from 'antd';
+import { Tabs } from "antd";
+import type { TabsProps } from "antd";
 
-const onChange = (key: string) => {
-    console.log(key);
-};
+interface FileItem {
+    name: string;
+    language: string;
+    value: string;
+}
 
-const items: TabsProps['items'] = [
-    {
-        key: '1',
-        label: 'Tab 1',
-        children: 'Content of Tab Pane 1',
-    },
-    {
-        key: '2',
-        label: 'Tab 2',
-        children: 'Content of Tab Pane 2',
-    },
-    {
-        key: '3',
-        label: 'Tab 3',
-        children: 'Content of Tab Pane 3',
-    },
-];
+interface TabsAboveProps {
+    files: Record<string, FileItem>;
+    activeKey: string;
+    onTabChange: (key: string) => void;
+}
 
-const TabsAbove = () => {
+export default function TabsAbove({ files, activeKey, onTabChange }: TabsAboveProps) {
+
+    const items: TabsProps["items"] = Object.values(files).map((file) => ({
+        key: file.name,
+        label: file.name,
+    }));
+
     return (
         <Tabs
-            defaultActiveKey="1"
             items={items}
-            onChange={onChange}
+            activeKey={activeKey}
+            onChange={onTabChange}
         />
     );
-};
-
-export default TabsAbove;
+}

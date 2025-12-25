@@ -1,46 +1,35 @@
+import { Editor } from "@monaco-editor/react";
+import { useState } from "react";
+import "./codeEditor.css";
 
-import { Editor } from '@monaco-editor/react'
-import { useState, useEffect } from 'react'
-
-import './codeEditor.css'
-
-interface codeEditorProps {
+interface CodeEditorProps {
     code: string;
+    onChange: (value: string) => void;
 }
 
-
-export default function CodeEditor({ code }: codeEditorProps) {
-
-    const [editorcode, setEditorCode] = useState(code);
+export default function CodeEditor({ code, onChange }: CodeEditorProps) {
     const [output, setOutput] = useState("");
 
-    useEffect(() => {
-        setEditorCode(code)
-    }, [code]);
-
-
     const runCode = () => {
-        let logs: string[] = []
+        let logs: string[] = [];
 
-        const originalLog = console.log
+        const originalLog = console.log;
         console.log = (...args) => {
-            logs.push(args.join(" "))
-        }
+            logs.push(args.join(" "));
+        };
 
         try {
-            const result = eval(code)
+            const result = eval(code);
             if (result !== undefined) {
-                logs.push(String(result))
+                logs.push(String(result));
             }
-            setOutput(logs.join("\n"))
-        } catch (err) {
-
+            setOutput(logs.join("\n"));
+        } catch (err: any) {
+            setOutput(err.message);
         }
 
-
-        console.log = originalLog
-    }
-
+        console.log = originalLog;
+    };
 
     return (
         <>
@@ -49,17 +38,13 @@ export default function CodeEditor({ code }: codeEditorProps) {
                 width="100%"
                 language="javascript"
                 theme="vs-dark"
-                value={editorcode}
-                onChange={(value) => setEditorCode(value ?? "")}
+                value={code}
+                onChange={(value) => onChange(value ?? "")}
             />
 
-            <button onClick={runCode}>
-                Run
-            </button>
+            <button onClick={runCode}>Run</button>
 
-            <pre className='result'>
-                {output}
-            </pre>
+            <pre className="result">{output}</pre>
         </>
     );
 }
