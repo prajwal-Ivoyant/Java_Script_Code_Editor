@@ -1,6 +1,4 @@
-
-
-import './fileManager.css'
+import "./fileManager.css";
 
 interface FileItem {
     name: string;
@@ -11,14 +9,32 @@ interface FileItem {
 interface ShowFilesProps {
     files: Record<string, FileItem>;
     onFileSelect: (file: FileItem) => void;
+    onDeleteFile: (fileName: string) => void;
 }
 
-
-export default function ShowFiles({ files, onFileSelect }: ShowFilesProps) {
+export default function ShowFiles({
+    files,
+    onFileSelect,
+    onDeleteFile,
+}: ShowFilesProps) {
     return (
-        <div >
+        <div>
             {Object.values(files).map((file) => (
-                <div className='filesDiv' key={file.name} onClick={() => onFileSelect(file)}>{file.name}</div>
+                <div className="filesDiv" key={file.name}>
+                    <span onClick={() => onFileSelect(file)}>
+                        {file.name}
+                    </span>
+
+                    <button
+                        className="deleteBtn"
+                        onClick={(e) => {
+                            e.stopPropagation(); // 🔴 IMPORTANT
+                            onDeleteFile(file.name);
+                        }}
+                    >
+                        ❌
+                    </button>
+                </div>
             ))}
         </div>
     );
