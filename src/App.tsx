@@ -21,30 +21,51 @@ const FILES_KEY = "editor-files";
 const ACTIVE_FILE_KEY = "active-file";
 
 const loadFiles = (): Record<string, FileItem> => {
+  if (typeof window === "undefined") {
+    return filesData;
+  }
+
   const saved = localStorage.getItem(FILES_KEY);
   return saved ? JSON.parse(saved) : filesData;
 };
 
-const loadActiveFileKey = (files: Record<string, FileItem>): string => {
+
+
+const loadActiveFileKey = (
+  files: Record<string, FileItem>
+): string => {
+  if (typeof window === "undefined") {
+    return Object.keys(files)[0];
+  }
+
   const saved = localStorage.getItem(ACTIVE_FILE_KEY);
   return saved && files[saved] ? saved : Object.keys(files)[0];
 };
 
+
 function App() {
   // load from localStorage
-  const [files, setFiles] = useState<Record<string, FileItem>>(loadFiles);
+  const [files, setFiles] = useState<Record<string, FileItem>>(() =>
+    loadFiles()
+  );
+
 
   const [activeFileKey, setActiveFileKey] = useState<string>(() =>
     loadActiveFileKey(loadFiles())
   );
 
   useEffect(() => {
-    localStorage.setItem(FILES_KEY, JSON.stringify(files));
+    if (typeof window !== "undefined") {
+      localStorage.setItem(FILES_KEY, JSON.stringify(files));
+    }
   }, [files]);
 
   useEffect(() => {
-    localStorage.setItem(ACTIVE_FILE_KEY, activeFileKey);
+    if (typeof window !== "undefined") {
+      localStorage.setItem(ACTIVE_FILE_KEY, activeFileKey);
+    }
   }, [activeFileKey]);
+
 
   const activeFile = files[activeFileKey];
   if (!activeFile) return null;
@@ -52,21 +73,6 @@ function App() {
   const addNewFile = () => {
     const name = prompt("Enter file name (e.g. main.js)");
     if (!name) return;
-
-
-
-
-  const updateFileContent = (newValue: string) => {
-    setFiles((prev) => ({
-      ...prev,
-      [activeFileKey]: {
-        ...prev[activeFileKey],
-        value: newValue,
-      },
-    }));
-  };
-
-  return (
 
     if (files[name]) {
       alert("File already exists");
@@ -118,7 +124,6 @@ function App() {
           onFileSelect={(file) => setActiveFileKey(file.name)}
           onDeleteFile={deleteFile}
         />
-
       </div>
 
       <div className="right">
