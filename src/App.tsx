@@ -53,6 +53,21 @@ function App() {
     const name = prompt("Enter file name (e.g. main.js)");
     if (!name) return;
 
+
+
+
+  const updateFileContent = (newValue: string) => {
+    setFiles((prev) => ({
+      ...prev,
+      [activeFileKey]: {
+        ...prev[activeFileKey],
+        value: newValue,
+      },
+    }));
+  };
+
+  return (
+
     if (files[name]) {
       alert("File already exists");
       return;
@@ -103,6 +118,7 @@ function App() {
           onFileSelect={(file) => setActiveFileKey(file.name)}
           onDeleteFile={deleteFile}
         />
+
       </div>
 
       <div className="right">
