@@ -1,4 +1,5 @@
 import "./fileManager.css";
+import { DeleteOutlined } from '@ant-design/icons';
 
 interface FileItem {
     name: string;
@@ -25,15 +26,15 @@ export default function ShowFiles({
                         {file.name}
                     </span>
 
-                    <button
-                        className="deleteBtn"
+
+
+                    <div className="deleteBtn"
                         onClick={(e) => {
-                            e.stopPropagation(); // 🔴 IMPORTANT
+                            e.stopPropagation();
                             onDeleteFile(file.name);
                         }}
                     >
-                        ❌
-                    </button>
+                        <DeleteOutlined /></div>
                 </div>
             ))}
         </div>

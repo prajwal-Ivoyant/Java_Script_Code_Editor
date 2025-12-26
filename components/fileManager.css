@@ -1,8 +1,15 @@
 .filesDiv {
     padding: 3px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .filesDiv:hover {
     background-color: rgb(0, 0, 0);
     cursor: pointer;
+
+}
+
+.deleteBtn:hover {
+    color: rgb(209, 4, 4);
 }

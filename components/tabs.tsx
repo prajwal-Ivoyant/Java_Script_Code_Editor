@@ -1,5 +1,6 @@
-import { Tabs } from "antd";
+import { Tabs } from 'antd';
 import type { TabsProps } from "antd";
+
 
 interface FileItem {
     name: string;
@@ -13,8 +14,10 @@ interface TabsAboveProps {
     onTabChange: (key: string) => void;
 }
 
-export default function TabsAbove({ files, activeKey, onTabChange }: TabsAboveProps) {
 
+
+
+export default function TabsAbove({ files, activeKey, onTabChange, }: TabsAboveProps) {
     const items: TabsProps["items"] = Object.values(files).map((file) => ({
         key: file.name,
         label: file.name,
