@@ -25,6 +25,8 @@ export default function ShowFiles({
                         {file.name}
                     </span>
 
+
+
                     <div className="deleteBtn"
                         onClick={(e) => {
                             e.stopPropagation();
