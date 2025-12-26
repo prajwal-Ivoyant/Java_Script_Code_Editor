@@ -17,8 +17,10 @@
 .explorer {
   background-color: #1e1e1e;
   padding: 3px;
-
+  display: flex;
+  justify-content: space-between;
 }
+
 
 .files {
   padding: 7px;
@@ -52,4 +54,8 @@
 .right> :nth-child(2) {
   flex: 1;
   border-bottom: 1px solid #333;
+}
+
+.addNewBtn:hover {
+  color: aqua;
 }
