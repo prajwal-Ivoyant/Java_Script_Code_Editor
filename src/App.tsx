@@ -1,27 +1,14 @@
+import "./App.css";
+import filesData from "./data/files";
+import { useState, useEffect } from "react";
 
-import './App.css'
-import files from './data/files'
+import TabsAbove from "../components/tabs";
+import CodeEditor from "../components/codeEditor";
+import ShowFiles from "../components/fileManager";
 
-
-import CodeEditor from '../components/codeEditor'
-
-import ShowFiles from '../components/fileManager'
-import { useState } from 'react'
-
-import TabsAbove from '../components/tabs'
-
-<<<<<<< Updated upstream
-function App() {
-
-  const [currentFile, setCurrentFile] = useState(
-    Object.values(files)[0]
-  )
-
-=======
 import { createFile } from "./utils/addFileFunction";
 import { removeFile } from "./utils/deleteFileFunction";
-
-import { FileAddOutlined } from '@ant-design/icons';
+import { FileAddOutlined } from "@ant-design/icons";
 
 interface FileItem {
   name: string;
@@ -29,7 +16,7 @@ interface FileItem {
   value: string;
 }
 
-// localStorage 
+// localStorage
 const FILES_KEY = "editor-files";
 const ACTIVE_FILE_KEY = "active-file";
 
@@ -43,47 +30,13 @@ const loadActiveFileKey = (files: Record<string, FileItem>): string => {
   return saved && files[saved] ? saved : Object.keys(files)[0];
 };
 
-
-<<<<<<< Updated upstream
 function App() {
-
-=======
-import { createFile } from "./utils/addFileFunction";
-import { removeFile } from "./utils/deleteFileFunction";
-
-import { FileAddOutlined } from '@ant-design/icons';
-
-interface FileItem {
-  name: string;
-  language: string;
-  value: string;
-}
-
-// localStorage 
-const FILES_KEY = "editor-files";
-const ACTIVE_FILE_KEY = "active-file";
-
-const loadFiles = (): Record<string, FileItem> => {
-  const saved = localStorage.getItem(FILES_KEY);
-  return saved ? JSON.parse(saved) : filesData;
-};
-
-const loadActiveFileKey = (files: Record<string, FileItem>): string => {
-  const saved = localStorage.getItem(ACTIVE_FILE_KEY);
-  return saved && files[saved] ? saved : Object.keys(files)[0];
-};
-
-
-function App() {
-
->>>>>>> Stashed changes
   // load from localStorage
   const [files, setFiles] = useState<Record<string, FileItem>>(loadFiles);
 
   const [activeFileKey, setActiveFileKey] = useState<string>(() =>
     loadActiveFileKey(loadFiles())
   );
-
 
   useEffect(() => {
     localStorage.setItem(FILES_KEY, JSON.stringify(files));
@@ -95,8 +48,6 @@ function App() {
 
   const activeFile = files[activeFileKey];
   if (!activeFile) return null;
-
-
 
   const addNewFile = () => {
     const name = prompt("Enter file name (e.g. main.js)");
@@ -125,11 +76,6 @@ function App() {
     }
   };
 
-
-
-
-
-
   const updateFileContent = (newValue: string) => {
     setFiles((prev) => ({
       ...prev,
@@ -139,56 +85,25 @@ function App() {
       },
     }));
   };
->>>>>>> Stashed changes
 
   return (
-    <>
-      <div className="container">
-
-        <div className="listOfFiles">
-          <div className='explorer'><p>Explorer</p></div><hr />
-          <div className="files">
-            <ShowFiles
-              files={files}
-              onFileSelect={setCurrentFile}
-            />
-          </div>
-        </div>
-
-<<<<<<< Updated upstream
-
-        <div className="right">
-          <div className="language">
-            <TabsAbove
-              files={files}
-              onFileSelect={setCurrentFile}
-            />
-          </div>
-          <CodeEditor
-            code={currentFile.value}
-          />
-
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
     <div className="container">
       <div className="listOfFiles">
         <div className="explorer">
           <span>Explorer</span>
-          <div onClick={addNewFile}><FileAddOutlined className="addNewBtn" /></div>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+          <div onClick={addNewFile}>
+            <FileAddOutlined className="addNewBtn" />
+          </div>
         </div>
 
+        <hr />
 
+        <ShowFiles
+          files={files}
+          onFileSelect={(file) => setActiveFileKey(file.name)}
+          onDeleteFile={deleteFile}
+        />
       </div>
-<<<<<<< Updated upstream
-    </>
-  )
-=======
 
       <div className="right">
         <TabsAbove
@@ -203,10 +118,7 @@ function App() {
         />
       </div>
     </div>
-
-
   );
->>>>>>> Stashed changes
 }
 
-export default App
+export default App;

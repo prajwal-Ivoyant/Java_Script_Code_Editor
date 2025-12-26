@@ -1,17 +1,5 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-
-import './fileManager.css'
-
-=======
 import "./fileManager.css";
 import { DeleteOutlined } from '@ant-design/icons';
->>>>>>> Stashed changes
-=======
-import "./fileManager.css";
-import { DeleteOutlined } from '@ant-design/icons';
->>>>>>> Stashed changes
 interface FileItem {
     name: string;
     language: string;
@@ -21,28 +9,30 @@ interface FileItem {
 interface ShowFilesProps {
     files: Record<string, FileItem>;
     onFileSelect: (file: FileItem) => void;
+    onDeleteFile: (fileName: string) => void;
 }
 
-
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-export default function ShowFiles({ files, onFileSelect }: ShowFilesProps) {
+export default function ShowFiles({
+    files,
+    onFileSelect,
+    onDeleteFile,
+}: ShowFilesProps) {
     return (
-        <div >
+        <div>
             {Object.values(files).map((file) => (
-                <div className='filesDiv' key={file.name} onClick={() => onFileSelect(file)}>{file.name}</div>
-=======
-=======
->>>>>>> Stashed changes
+                <div className="filesDiv" key={file.name}>
+                    <span onClick={() => onFileSelect(file)}>
+                        {file.name}
+                    </span>
+
                     <div className="deleteBtn"
                         onClick={(e) => {
                             e.stopPropagation();
                             onDeleteFile(file.name);
                         }}
                     >
-                        <DeleteOutlined className="deleteBtn" /></div>
+                        <DeleteOutlined /></div>
                 </div>
->>>>>>> Stashed changes
             ))}
         </div>
     );
