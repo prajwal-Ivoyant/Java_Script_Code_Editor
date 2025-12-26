@@ -44,8 +44,39 @@ const loadActiveFileKey = (files: Record<string, FileItem>): string => {
 };
 
 
+<<<<<<< Updated upstream
 function App() {
 
+=======
+import { createFile } from "./utils/addFileFunction";
+import { removeFile } from "./utils/deleteFileFunction";
+
+import { FileAddOutlined } from '@ant-design/icons';
+
+interface FileItem {
+  name: string;
+  language: string;
+  value: string;
+}
+
+// localStorage 
+const FILES_KEY = "editor-files";
+const ACTIVE_FILE_KEY = "active-file";
+
+const loadFiles = (): Record<string, FileItem> => {
+  const saved = localStorage.getItem(FILES_KEY);
+  return saved ? JSON.parse(saved) : filesData;
+};
+
+const loadActiveFileKey = (files: Record<string, FileItem>): string => {
+  const saved = localStorage.getItem(ACTIVE_FILE_KEY);
+  return saved && files[saved] ? saved : Object.keys(files)[0];
+};
+
+
+function App() {
+
+>>>>>>> Stashed changes
   // load from localStorage
   const [files, setFiles] = useState<Record<string, FileItem>>(loadFiles);
 
@@ -124,6 +155,7 @@ function App() {
           </div>
         </div>
 
+<<<<<<< Updated upstream
 
         <div className="right">
           <div className="language">
@@ -138,11 +170,16 @@ function App() {
 
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
     <div className="container">
       <div className="listOfFiles">
         <div className="explorer">
           <span>Explorer</span>
           <div onClick={addNewFile}><FileAddOutlined className="addNewBtn" /></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         </div>
 
