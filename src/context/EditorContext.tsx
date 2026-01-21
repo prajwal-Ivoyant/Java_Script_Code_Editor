@@ -200,13 +200,13 @@ ${code}
 
     //=> typescript not supported
     if (lang === "typescript") {
-      setOutput("TypeScript execution not supported yet. Transpilation required.");
+      setOutput("TypeScript execution not supported yet.");
       return;
     }
 
     //=> python not supported
     if (lang === "python") {
-      setOutput("Python execution not supported in browser. Backend required.");
+      setOutput("Python execution not supported in browser.");
       return;
     }
   };
