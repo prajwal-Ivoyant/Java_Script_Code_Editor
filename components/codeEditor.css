@@ -6,3 +6,11 @@
     color: #00ffcc;
     overflow-y: auto;
 }
+
+iframe {
+    width: 100%;
+
+    border: 1px solid #444;
+    margin-top: 10px;
+    background: white;
+}
