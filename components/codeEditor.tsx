@@ -38,18 +38,7 @@ export default function CodeEditor() {
 
     return (
         <>
-            <label htmlFor="language-select">Language</label>
-            {/* <select
-                id="language-select"
-                value={activeFile.language}
-                onChange={(e) => updateFileLanguage(e.target.value)}
-            >
-                <option value="javascript">JavaScript</option>
-                <option value="typescript">TypeScript</option>
-                <option value="html">HTML</option>
-                <option value="css">CSS</option>
-                <option value="python">Python</option>
-            </select> */}
+
 
             <Editor
                 height="400px"
