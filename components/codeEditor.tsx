@@ -6,7 +6,6 @@ export default function CodeEditor() {
     const {
         activeFile,
         updateFileContent,
-        updateFileLanguage,
         runCode,
         output,
         iframeRef,
