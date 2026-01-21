@@ -7,7 +7,7 @@ interface FileItem {
 }
 
 
-// returns new files object
+//=> returns new files object 
 export const removeFile = (files: Record<string, FileItem>, name: string):
     Record<string, FileItem> => {
     const updated = { ...files };
