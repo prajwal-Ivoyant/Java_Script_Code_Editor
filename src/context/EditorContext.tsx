@@ -23,7 +23,7 @@ interface EditorContextType {
   //=> code runner
   runCode: () => void;
   output: string;
-  iframeRef: React.RefObject<HTMLIFrameElement>;
+  iframeRef: React.RefObject<HTMLIFrameElement | null>;
 
   //=> add file modal
   showAddFileModal: boolean;

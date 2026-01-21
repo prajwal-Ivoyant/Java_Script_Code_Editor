@@ -4,34 +4,41 @@
   box-sizing: border-box;
 }
 
-
 .container {
   display: flex;
   height: 100vh;
   width: 100vw;
-  background-color: #1e1e1e;
-  color: #ffffff;
+  background-color: #1a1b26;
+  color: #c0caf5;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .explorer {
-  background-color: #1e1e1e;
-  padding: 3px;
+  background-color: #1a1b26;
+  padding: 6px;
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid #292e42;
 }
-
 
 .files {
   padding: 7px;
+  color: #a9b1d6;
 }
 
 .listOfFiles {
   width: 220px;
-  background-color: #252526;
-  border-right: 1px solid #333;
+  background-color: #16161e;
+  border-right: 1px solid #292e42;
   padding: 12px;
 }
+
+.listOfFiles div {
+  padding: 6px 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 
 
 .right {
@@ -39,24 +46,32 @@
   display: flex;
   flex-direction: column;
   padding-left: 10px;
+  background-color: #1a1b26;
 }
 
 .language {
   height: 40px;
-  background-color: #2d2d2d;
-  border-bottom: 1px solid #333;
+  background-color: #1f2335;
+  border-bottom: 1px solid #292e42;
   display: flex;
   align-items: center;
   padding: 0 12px;
   font-size: 14px;
-  color: #cccccc;
+  color: #7aa2f7;
+  font-weight: 500;
 }
 
 .right> :nth-child(2) {
   flex: 1;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #292e42;
+}
+
+.addNewBtn {
+  color: #9ece6a;
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
 .addNewBtn:hover {
-  color: aqua;
+  color: #7dcfff;
 }
