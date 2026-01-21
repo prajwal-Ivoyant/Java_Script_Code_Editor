@@ -1,50 +1,60 @@
 import { Editor } from "@monaco-editor/react";
-import { useState } from "react";
 import "./codeEditor.css";
+import { useEditor } from "../src/context/EditorContext";
 
-interface CodeEditorProps {
-    code: string;
-    onChange: (value: string) => void;
-}
+export default function CodeEditor() {
+    const {
+        activeFile,
+        updateFileContent,
+        updateFileLanguage,
+        runCode,
+        output,
+        iframeRef,
+    } = useEditor();
 
-export default function CodeEditor({ code, onChange }: CodeEditorProps) {
-    const [output, setOutput] = useState("");
-
-    const runCode = () => {
-        let logs: string[] = [];
-
-        const originalLog = console.log;
-        console.log = (...args) => {
-            logs.push(args.join(" "));
-        };
-
-        try {
-            const result = eval(code);
-            if (result !== undefined) {
-                logs.push(String(result));
-            }
-            setOutput(logs.join("\n"));
-        } catch (err: any) {
-            setOutput(err.message);
-        }
-
-        console.log = originalLog;
-    };
+    if (!activeFile) return null;
 
     return (
         <>
+            <label htmlFor="language-select">Language</label>
+            {/* <select
+                id="language-select"
+                value={activeFile.language}
+                onChange={(e) => updateFileLanguage(e.target.value)}
+            >
+                <option value="javascript">JavaScript</option>
+                <option value="typescript">TypeScript</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="python">Python</option>
+            </select> */}
+
             <Editor
                 height="400px"
                 width="100%"
-                language="javascript"
+                language={activeFile.language}
                 theme="vs-dark"
-                value={code}
-                onChange={(value) => onChange(value ?? "")}
+                value={activeFile.value}
+                onChange={(value) => updateFileContent(value ?? "")}
             />
 
             <button onClick={runCode}>Run</button>
 
+            {/* JS Output */}
             <pre className="result">{output}</pre>
+
+            {/* HTML/CSS Output */}
+            <iframe
+                ref={iframeRef}
+                title="result-frame"
+                style={{
+                    width: "100%",
+                    height: "300px",
+                    border: "1px solid #444",
+                    marginTop: "10px",
+                    background: "white",
+                }}
+            />
         </>
     );
 }

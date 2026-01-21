@@ -1,39 +1,47 @@
 import "./fileManager.css";
-import { DeleteOutlined } from '@ant-design/icons';
-interface FileItem {
-    name: string;
-    language: string;
-    value: string;
-}
+import { DeleteOutlined, ExclamationCircleFilled } from "@ant-design/icons";
+import { useEditor } from "../src/context/EditorContext";
+import { Modal } from "antd";
 
-interface ShowFilesProps {
-    files: Record<string, FileItem>;
-    onFileSelect: (file: FileItem) => void;
-    onDeleteFile: (fileName: string) => void;
-}
+const { confirm } = Modal;
 
-export default function ShowFiles({
-    files,
-    onFileSelect,
-    onDeleteFile,
-}: ShowFilesProps) {
+export default function ShowFiles() {
+    const { files, setActiveFileKey, deleteFile } = useEditor();
+
+    const showDeleteConfirm = (fileName: string) => {
+        confirm({
+            title: "Are you sure you want to delete this file?",
+            icon: <ExclamationCircleFilled />,
+            content: `File: ${fileName}`,
+            okText: "Yes",
+            okType: "danger",
+            cancelText: "No",
+            onOk() {
+                deleteFile(fileName);
+            },
+            onCancel() {
+
+            },
+        });
+    };
+
     return (
         <div>
             {Object.values(files).map((file) => (
                 <div className="filesDiv" key={file.name}>
-                    <span onClick={() => onFileSelect(file)}>
+                    <span onClick={() => setActiveFileKey(file.name)}>
                         {file.name}
                     </span>
 
-
-
-                    <div className="deleteBtn"
+                    <div
+                        className="deleteBtn"
                         onClick={(e) => {
                             e.stopPropagation();
-                            onDeleteFile(file.name);
+                            showDeleteConfirm(file.name);
                         }}
                     >
-                        <DeleteOutlined /></div>
+                        <DeleteOutlined />
+                    </div>
                 </div>
             ))}
         </div>
