@@ -1,10 +1,10 @@
-import { createContext, useContext, useEffect, useState, useRef } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import filesData from "../data/files";
 import { createFile } from "../utils/addFileFunction";
 import { removeFile } from "../utils/deleteFileFunction";
 
 //=> file interface
-interface FileItem {
+export interface FileItem {
   name: string;
   language: string;
   value: string;
@@ -16,9 +16,12 @@ interface EditorContextType {
   activeFileKey: string;
   activeFile: FileItem;
   setActiveFileKey: (key: string) => void;
+
   deleteFile: (name: string) => void;
   updateFileContent: (value: string) => void;
   updateFileLanguage: (language: string) => void;
+
+  renameFile: (oldName: string, newName: string) => void;
 
   //=> code runner
   runCode: () => void;
@@ -32,7 +35,6 @@ interface EditorContextType {
   confirmAddFile: (fileName: string) => void;
 }
 
-//=> create context
 const EditorContext = createContext<EditorContextType | null>(null);
 
 const FILES_KEY = "editor-files";
@@ -52,7 +54,6 @@ const loadActiveFileKey = (files: Record<string, FileItem>) => {
   return saved && files[saved] ? saved : Object.keys(files)[0];
 };
 
-//=> provider component
 export function EditorProvider({ children }: { children: React.ReactNode }) {
   //=> files state
   const [files, setFiles] = useState<Record<string, FileItem>>(loadFiles);
@@ -139,6 +140,32 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
     setShowAddFileModal(false);
   };
 
+  //=> rename file
+  const renameFile = (oldName: string, newName: string) => {
+    if (!newName || files[newName]) return; // prevent empty or duplicate names
+
+    const updatedFiles: Record<string, FileItem> = {};
+
+    Object.keys(files).forEach((key) => {
+      if (key === oldName) {
+        updatedFiles[newName] = {
+          ...files[oldName],
+          name: newName,
+        };
+      } else {
+        updatedFiles[key] = files[key];
+      }
+    });
+
+    setFiles(updatedFiles);
+
+    // Update active file key if needed
+    if (activeFileKey === oldName) {
+      setActiveFileKey(newName);
+    }
+  };
+
+
   //=> run code based on language
   const runCode = () => {
     const code = activeFile.value;
@@ -211,7 +238,6 @@ ${code}
     }
   };
 
-  //=> provide context values
   return (
     <EditorContext.Provider
       value={{
@@ -222,6 +248,8 @@ ${code}
         deleteFile,
         updateFileContent,
         updateFileLanguage,
+
+        renameFile,
 
         //=> code runner
         runCode,

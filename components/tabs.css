@@ -1,5 +1,59 @@
-.TabsStyle .ant-tabs-tab-btn {
-    color: #9ca3af;
-    /* light gray */
+.tabs_run {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1f2335;
+    border-bottom: 1px solid #1f2335;
+    padding: 6px 10px;
+}
+
+/* Tabs container (Ant Design Tabs wrapper) */
+.TabsStyle {
+    flex: 1;
+}
+
+/* Ant Design Tabs overrides (optional but useful) */
+.TabsStyle .ant-tabs-nav {
+    margin: 0;
+}
+
+.TabsStyle .ant-tabs-tab {
+    color: #cccccc;
+    font-size: 13px;
+    padding: 6px 12px;
+}
+
+.TabsStyle .ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #ffffff;
     font-weight: 500;
+}
+
+.TabsStyle .ant-tabs-ink-bar {
+    background-color: #007acc;
+    /* VS Code blue */
+}
+
+/* Run button */
+.runBtn {
+    margin-left: 12px;
+    padding: 6px 14px;
+    background-color: #1f2335;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.runBtn:hover {
+    background-color: #0090ff;
+}
+
+.runBtn:active {
+    transform: scale(0.97);
+}
+
+.runBtn:focus {
+    outline: none;
 }

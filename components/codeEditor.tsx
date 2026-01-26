@@ -7,7 +7,6 @@ export default function CodeEditor() {
         activeFile,
         updateFileContent,
 
-        runCode,
         output,
         iframeRef,
     } = useEditor();
@@ -38,8 +37,11 @@ export default function CodeEditor() {
 
     return (
         <>
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
             <Editor
                 height="400px"
                 width="100%"
@@ -50,9 +52,8 @@ export default function CodeEditor() {
                 onChange={(value) => updateFileContent(value ?? "")}
             />
 
-            <button onClick={runCode}>Run</button>
 
-            {/* JS Output */}
+
             <pre className="result">{output}</pre>
 
             {activeFile.language === "html" && (
