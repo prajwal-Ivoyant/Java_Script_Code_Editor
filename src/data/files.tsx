@@ -2,7 +2,7 @@ const files = {
   "index.js": {
     name: "index.js",
     language: "javascript",
-    value: `console.log("Hello from index.js");`
+    value: `console.log("Hello from index.js");`,
   },
 
   "app.js": {
@@ -12,7 +12,7 @@ const files = {
   return a + b;
 }
 
-console.log(add(3, 4));`
+console.log(add(3, 4));`,
   },
 
   "utils.js": {
@@ -20,7 +20,7 @@ console.log(add(3, 4));`
     language: "javascript",
     value: `export function multiply(a, b) {
   return a * b;
-}`
+}`,
   },
 
   "style.css": {
@@ -29,7 +29,7 @@ console.log(add(3, 4));`
     value: `body {
   background-color: #111827;
   color: #e5e7eb;
-}`
+}`,
   },
 
   "index.html": {
@@ -43,8 +43,8 @@ console.log(add(3, 4));`
   <body>
     <h1>Hello</h1>
   </body>
-</html>`
-  }
+</html>`,
+  },
 };
 
 export default files;

@@ -1,15 +1,44 @@
 .filesDiv {
-    padding: 3px;
+    padding: 6px 10px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    color: #cccccc;
+    font-size: 13px;
+    border-radius: 4px;
+    transition: background-color 0.15s ease;
 }
 
+/* Hover effect for each file row */
 .filesDiv:hover {
-    background-color: rgb(0, 0, 0);
+    background-color: #2a2a2a;
     cursor: pointer;
-
 }
 
+/* Left side: file icon + name */
+.filesDiv>span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* File name spacing */
+.filesDiv>span span {
+    padding-left: 4px;
+}
+
+/* Delete button */
+.deleteBtn {
+    opacity: 0;
+    transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+/* Show delete icon only on hover */
+.filesDiv:hover .deleteBtn {
+    opacity: 1;
+}
+
+/* Delete hover color */
 .deleteBtn:hover {
     color: rgb(209, 4, 4);
 }
