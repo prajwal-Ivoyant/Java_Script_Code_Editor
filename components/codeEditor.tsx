@@ -37,11 +37,6 @@ export default function CodeEditor() {
 
     return (
         <>
-<<<<<<< Updated upstream
-
-
-=======
->>>>>>> Stashed changes
             <Editor
                 height="400px"
                 width="100%"
