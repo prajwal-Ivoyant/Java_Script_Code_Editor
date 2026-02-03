@@ -22,7 +22,6 @@ export default function ShowFiles() {
             cancelText: "No",
 
 
-
             onOk() {
                 deleteFile(fileName);
             },
